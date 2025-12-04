@@ -332,6 +332,7 @@ fi
 
 # execute the mpiexec command
 $mpicmd
+mpiexec_rc=$?
 
 # collect the binding report and clean up the temporary logfiles
 if [ $enable_logs -eq 1 ]; then
@@ -339,3 +340,7 @@ if [ $enable_logs -eq 1 ]; then
    mv $tmp_logdir/logfile $logfile
    rm -rf $tmp_logdir
 fi
+
+# exit with the mpiexec return code so failures are propagated
+exit $mpiexec_rc
+
